@@ -1,5 +1,6 @@
 <script>
   export var login;
+  import { fade } from "svelte/transition";
 
   import { createEventDispatcher } from "svelte";
   import { onMount } from "svelte";
@@ -36,7 +37,7 @@
   }
 </script>
 
-<div role="main">
+<div role="main" in:fade>
   <div>
     <div class="animate slide-in-next">
       <div>

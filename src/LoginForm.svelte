@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { fade } from "svelte/transition";
   const dispatch = createEventDispatcher();
   var login;
   var error = false;
@@ -21,7 +22,7 @@
   }
 </script>
 
-<div role="main">
+<div role="main" in:fade>
   <div>
     <div class="pagination-view animate slide-in-next">
       <div>
