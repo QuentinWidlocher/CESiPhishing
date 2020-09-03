@@ -2,9 +2,15 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   var login;
+  var error = false;
 
   function onLoginNext() {
-    dispatch("next", { login });
+    if (!!login && /@.*cesi\..*/.test(login)) {
+      error = false;
+      dispatch("next", { login });
+    } else {
+      error = true;
+    }
   }
 
   function handleKeyup() {
@@ -26,6 +32,11 @@
         </div>
         <div class="row">
           <div role="alert" aria-live="assertive" />
+          {#if error}
+            <div class="col-md-24 error ext-error" id="usernameError">
+              Enter a valid email address, phone number, or Skype name.
+            </div>
+          {/if}
           <div class="form-group col-md-24">
             <div class="placeholderContainer">
 
@@ -39,6 +50,7 @@
                 aria-required="true"
                 bind:value={login}
                 on:keyup|preventDefault={handleKeyup}
+                class:has-error={error}
                 placeholder="Email, phone, or Skype" />
 
             </div>
